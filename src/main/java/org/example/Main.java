@@ -2,6 +2,12 @@ package org.example;
 
 import java.util.*;
 
+class Employee{
+    public int id;
+    public int salary;
+    public int department;
+}
+
 class ListNode {
      int val;
      ListNode next;
@@ -10,6 +16,8 @@ class ListNode {
      ListNode(int val, ListNode next) { this.val = val; this.next = next; }
 
   }
+
+
 
 public class Main {
 
@@ -189,13 +197,116 @@ public class Main {
         return index;
     }
 
-    public static void main(String[] args) {
+    public static void countApplesAndOranges(int s, int t, int a, int b, List<Integer> apples, List<Integer> oranges) {
+        // Write your code here
 
-        List<Long> list = new ArrayList<>();
-        Long aLong = list.parallelStream().reduce((a,b) -> a+b).orElse(new Long(0));
+        int currentApple = 0;
+        int currentOrange= 0;
+
+        int totalApple = 0;
+        int totalOrange = 0;
+
+        for (int apple : apples){
+            if (apple >= 0){
+                currentApple = a + apple;
+                if (currentApple >= s && currentApple <= t){
+                    totalApple++;
+                }
+            }
+        }
+
+        for (int orange : oranges){
+            if (orange <= 0){
+                currentOrange = b - (-orange);
+                if (currentOrange >= s && currentOrange <= t){
+                    totalOrange++;
+                }
+            }
+        }
+        System.out.println(totalApple);
+        System.out.println(totalOrange);
 
     }
 
+    public static int birthday(List<Integer> s, int sum, int range) {
+        // Write your code here
+
+        int total = 0;
+        int currentRemoval = 0;
+        int nextElement = range;
+        int size = s.size();
+
+        int currentSum = 0;
+        int currentIndex = 0;
+        while (currentIndex < range){
+            currentSum += s.get(currentIndex++);
+        }
+
+        if (currentSum == sum){
+            total++;
+        }
+
+        while (range < size){
+            currentSum += s.get(range);
+            currentSum -= s.get(currentRemoval);
+            currentRemoval++;
+            range++;
+            if (currentSum == sum){
+                total++;
+            }
+        }
+
+        return total;
+    }
+
+    public static int divisibleSumPairs(int n, int k, List<Integer> ar) {
+
+        // Write your code here
+
+        int total = 0;
+        for (int i = 0 ; i < n; i++){
+            int first = ar.get(i);
+            for (int j = i+1 ; j < n; j++){
+                int second = ar.get(j);
+                if ((first+second)%k == 0){
+                    total++;
+                }
+            }
+        }
+        return total;
+    }
+
+    public static void main(String[] args) {
+
+        Employee employee1 = new Employee();
+        employee1.department = 100;
+        employee1.id = 101;
+        employee1.salary = 1000;
+
+    }
+
+    public static int[] mergeArrays(int[] arr1, int[] arr2) {
+
+
+        int length = arr1.length;
+        int length2 = arr2.length;
+
+        int i = length-length2-1;
+        int j = length2-1;
+        int k = length-1;
+
+        while (i > -1 && j > -1){
+            if (arr1[i] > arr2[j]){
+                arr1[k] = arr1[i];
+                i--;
+            }else {
+                arr1[k] = arr2[j];
+                j--;
+            }
+            k--;
+        }
+        return arr1;
+    }
     public static int diagonalDifference(List<List<Integer>> arr) {
         // Write your code here
 
